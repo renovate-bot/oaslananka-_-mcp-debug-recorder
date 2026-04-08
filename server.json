@@ -1,0 +1,41 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "dev.oaslananka/mcp-debug-recorder",
+  "title": "MCP Debug Recorder",
+  "description": "Record debug sessions, commands, failed attempts, and successful fixes in local SQLite storage.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/oaslananka/mcp-debug-recorder",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "mcp-debug-recorder",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "DEBUG_RECORDER_DB",
+          "description": "Override the SQLite database location for local debug history.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "LOG_LEVEL",
+          "description": "Set the minimum structured log level: debug, info, warn, or error.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "FUZZY_THRESHOLD",
+          "description": "Override the Fuse.js threshold used during fuzzy reranking.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

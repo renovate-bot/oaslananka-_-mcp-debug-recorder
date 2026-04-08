@@ -14,10 +14,11 @@
   "bin": {
     "mcp-debug-recorder": "dist/mcp.js"
   },
-  "mcpName": "mcp-debug-recorder",
+  "mcpName": "dev.oaslananka/mcp-debug-recorder",
   "files": [
     "dist",
     "mcp.json",
+    "server.json",
     "README.md",
     "LICENSE",
     "CHANGELOG.md",
@@ -58,6 +59,14 @@
   ],
   "author": "Osman Aslan <oaslananka@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oaslananka/mcp-debug-recorder.git"
+  },
+  "homepage": "https://github.com/oaslananka/mcp-debug-recorder#readme",
+  "bugs": {
+    "url": "https://github.com/oaslananka/mcp-debug-recorder/issues"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
     "better-sqlite3": "12.8.0",
