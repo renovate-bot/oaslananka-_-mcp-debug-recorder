@@ -69,7 +69,9 @@ DEBUG_RECORDER_DB=/path/to/custom.db npx mcp-debug-recorder
 - `export_sessions`: export your local history for backup or migration
 - `import_sessions`: import a previously exported JSON payload
 
-## Claude Desktop Configuration
+## Client Setup
+
+### Claude Desktop
 
 ```json
 {
@@ -82,7 +84,9 @@ DEBUG_RECORDER_DB=/path/to/custom.db npx mcp-debug-recorder
 }
 ```
 
-## VS Code MCP Configuration
+### VS Code / GitHub Copilot
+
+Create or update `.vscode/mcp.json`:
 
 ```json
 {
@@ -94,6 +98,26 @@ DEBUG_RECORDER_DB=/path/to/custom.db npx mcp-debug-recorder
     }
   }
 }
+```
+
+### Codex CLI
+
+```bash
+codex mcp add mcp-debug-recorder -- npx mcp-debug-recorder
+codex mcp list
+```
+
+### Gemini CLI
+
+```bash
+gemini mcp add mcp-debug-recorder npx mcp-debug-recorder
+gemini mcp list
+```
+
+### Antigravity
+
+```powershell
+antigravity --add-mcp "{\"name\":\"mcp-debug-recorder\",\"command\":\"npx\",\"args\":[\"mcp-debug-recorder\"]}"
 ```
 
 ## Real Usage Examples
