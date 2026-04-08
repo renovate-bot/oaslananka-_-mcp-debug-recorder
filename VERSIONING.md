@@ -24,17 +24,22 @@ registry only stores metadata that points to that artifact.
 
 ## Namespace
 
-When this project is published with domain-based authentication, the intended MCP
+When this project is published with GitHub authentication, the intended MCP
 Registry name is:
 
 ```text
-dev.oaslananka/mcp-debug-recorder
+io.github.oaslananka/mcp-debug-recorder
 ```
 
 That name should be used in:
 
 - `package.json` as `mcpName`
 - `server.json` as `name`
+
+If you switch authentication strategies after an npm release has already been
+published, release a new npm version before publishing the registry metadata
+again. The registry validates ownership against the published package metadata,
+not only against the repository contents.
 
 ## Release Decision Matrix
 

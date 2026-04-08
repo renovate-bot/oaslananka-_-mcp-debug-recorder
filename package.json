@@ -1,6 +1,6 @@
 {
   "name": "mcp-debug-recorder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for recording debug sessions — query your debugging history with natural language",
   "type": "module",
   "main": "dist/mcp.js",
@@ -14,7 +14,7 @@
   "bin": {
     "mcp-debug-recorder": "dist/mcp.js"
   },
-  "mcpName": "dev.oaslananka/mcp-debug-recorder",
+  "mcpName": "io.github.oaslananka/mcp-debug-recorder",
   "files": [
     "dist",
     "mcp.json",

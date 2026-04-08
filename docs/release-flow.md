@@ -3,13 +3,13 @@
 This project uses Azure DevOps for release automation. GitHub Actions is not part
 of the release path.
 
-For npm, Azure publishes the package artifact. For the Official MCP Registry, Azure
-should use domain-based authentication with `oaslananka.dev`.
+For npm, Azure publishes the package artifact. For the Official MCP Registry, the
+lowest-friction path is GitHub authentication against the GitHub repository.
 
 ## Target MCP Registry Namespace
 
 ```text
-dev.oaslananka/mcp-debug-recorder
+io.github.oaslananka/mcp-debug-recorder
 ```
 
 ## One-Time Setup
@@ -20,17 +20,13 @@ dev.oaslananka/mcp-debug-recorder
 - Create `server.json`
 - Keep `server.json.name` equal to `package.json.mcpName`
 
-### 2. Verify domain ownership
+### 2. Authenticate with GitHub
 
-Recommended method: DNS verification
+Recommended method: `mcp-publisher login github`
 
-You generate a key pair once, publish the public key as a DNS TXT record under
-`oaslananka.dev`, and keep the private key in Azure Key Vault or a protected secret.
-
-Suggested secrets:
-
-- `NPM_TOKEN`
-- `MCP_PRIVATE_KEY`
+This avoids DNS and HTTP ownership verification and is the fastest path for
+one-off or occasional registry publishes. If you later want full Azure-only
+automation, you can revisit domain-based authentication.
 
 ## Azure Release Decision Flow
 
@@ -53,7 +49,7 @@ flowchart TD
     M --> N{"Metadata-only release?"}
     N -->|No| O["Align server.json.version with npm version"]
     N -->|Yes| P["Use prerelease version like 1.3.5-1"]
-    O --> Q["Authenticate with MCP Registry using DNS auth"]
+    O --> Q["Authenticate with MCP Registry using GitHub auth"]
     P --> Q
     Q --> R["Publish to Official MCP Registry"]
 ```
@@ -121,7 +117,7 @@ This follows the registry rule that each publication must use a unique
 
 ```json
 {
-  "name": "dev.oaslananka/mcp-debug-recorder",
+  "name": "io.github.oaslananka/mcp-debug-recorder",
   "version": "1.3.5",
   "packages": [
     {
@@ -138,7 +134,7 @@ This follows the registry rule that each publication must use a unique
 
 ```json
 {
-  "name": "dev.oaslananka/mcp-debug-recorder",
+  "name": "io.github.oaslananka/mcp-debug-recorder",
   "version": "1.3.5-1",
   "packages": [
     {
@@ -165,6 +161,8 @@ Operational guidance:
 - Run `PublishMcpRegistry` only after npm publish succeeds
 - For metadata-only registry publishes, skip `PublishNpm` and only run
   `PublishMcpRegistry`
+- The simplest operational model is Azure for npm, then a manual
+  `mcp-publisher login github` + `mcp-publisher publish` step for the registry
 
 ## References
 
