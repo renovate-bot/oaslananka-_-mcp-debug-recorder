@@ -1,19 +1,35 @@
 ci:
-  - ".github/workflows/**"
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**'
+          - '.github/labeler.yml'
+          - 'scripts/prepublish-check.*'
 docs:
-  - "docs/**"
-  - "*.md"
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'docs/**'
+          - '*.md'
 dependencies:
-  - "package.json"
-  - "package-lock.json"
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - 'package-lock.json'
 source:
-  - "src/**"
+  - changed-files:
+      - any-glob-to-any-file: 'src/**'
 tests:
-  - "test/**"
+  - changed-files:
+      - any-glob-to-any-file: 'test/**'
 security:
-  - "SECURITY.md"
-  - ".pre-commit-config.yaml"
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'SECURITY.md'
+          - '.pre-commit-config.yaml'
 release:
-  - "release-please-config.json"
-  - ".release-please-manifest.json"
-  - "CHANGELOG.md"
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'release-please-config.json'
+          - '.release-please-manifest.json'
+          - 'CHANGELOG.md'
+          - 'mcp.json'
+          - 'server.json'
