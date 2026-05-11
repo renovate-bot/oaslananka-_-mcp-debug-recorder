@@ -1,0 +1,14 @@
+pull_request_rules:
+  - name: auto-merge safe Renovate patch/minor devDependency updates
+    conditions:
+      - author = renovate[bot]
+      - label = dependencies
+      - -label = needs-review
+      - "#changes-requested-reviews-by = 0"
+      - check-success = CI
+      - check-success = Security
+      - check-success = CodeQL
+      - -draft
+    actions:
+      merge:
+        method: squash

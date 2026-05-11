@@ -47,14 +47,12 @@ describe('logging redaction', () => {
   });
 
   it('redacts long base64-like tokens and sk-style keys', () => {
-    const result = redact(
-      'token=QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo0MjQyNDI0MjQ= sk-1234567890abcdef1234567890abcdef'
-    ) as string;
+    const base64Like = 'QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo' + '0MjQyNDI0MjQ=';
+    const skLike = 'sk-' + '1234567890abcdef1234567890abcdef';
+    const result = redact(`token=${base64Like} ${skLike}`) as string;
 
-    expect(result).not.toContain(
-      'QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo0MjQyNDI0MjQ'
-    );
-    expect(result).not.toContain('sk-1234567890abcdef1234567890abcdef');
+    expect(result).not.toContain(base64Like.slice(0, -1));
+    expect(result).not.toContain(skLike);
     expect(result).toContain('[REDACTED]');
   });
 

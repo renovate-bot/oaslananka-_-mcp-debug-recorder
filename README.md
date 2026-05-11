@@ -1,6 +1,11 @@
 # mcp-debug-recorder
 
 [![npm version](https://img.shields.io/npm/v/mcp-debug-recorder.svg)](https://www.npmjs.com/package/mcp-debug-recorder)
+[![CI](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/ci.yml/badge.svg)](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/ci.yml)
+[![Security](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/security.yml/badge.svg)](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/security.yml)
+[![CodeQL](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/codeql.yml/badge.svg)](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/oaslananka-lab/mcp-debug-recorder/badge)](https://scorecard.dev/viewer/?uri=github.com/oaslananka-lab/mcp-debug-recorder)
+[![Release](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/release.yml/badge.svg)](https://github.com/oaslananka-lab/mcp-debug-recorder/actions/workflows/release.yml)
 [![License](https://img.shields.io/npm/l/mcp-debug-recorder.svg)](./LICENSE)
 [![npm downloads](https://img.shields.io/npm/dm/mcp-debug-recorder.svg)](https://www.npmjs.com/package/mcp-debug-recorder)
 [![LobeHub](https://lobehub.com/badge/mcp/mcp-debug-recorder)](https://lobehub.com/mcp/mcp-debug-recorder)
@@ -165,6 +170,8 @@ Useful routes:
 - `GET /version`
 - MCP endpoint: `POST/GET/DELETE /mcp`
 
+HTTP transport is intended for loopback/local use by default. For non-local deployments, bind it behind an authenticated reverse proxy and do not expose it directly to the internet.
+
 ## Development
 
 ```bash
@@ -191,5 +198,7 @@ Additional project docs:
 - [Architecture](./docs/architecture.md)
 - [Search Algorithm](./docs/search-algorithm.md)
 - [Release Flow](./docs/release-flow.md)
+- [Security Policy](./SECURITY.md)
+- [Contributing](./CONTRIBUTING.md)
 - [Versioning Policy](./VERSIONING.md)
 - [Roadmap](./ROADMAP.md)

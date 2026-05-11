@@ -32,3 +32,10 @@ Examples of issues that are in scope:
 All session data is stored locally at `~/.mcp-debug-recorder/sessions.db` unless you override `DEBUG_RECORDER_DB`.
 
 The package does not send debug history to external services. Streamable HTTP mode listens on localhost unless you place it behind your own proxy or tunnel.
+
+## Threat Model Notes
+
+- Streamable HTTP transport must bind to loopback for local use. For non-local deployments, put it behind an authenticated reverse proxy and TLS termination you control.
+- Do not expose the HTTP transport directly on a public interface. The server does not provide built-in authentication.
+- `DEBUG_RECORDER_DB` may point to sensitive debug history. Keep it outside version-controlled paths and use filesystem permissions appropriate for local secrets.
+- Logs redact common token and credential shapes, but command output can still contain sensitive operational context. Review exports before sharing.

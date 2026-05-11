@@ -5,6 +5,13 @@
 # Default owner for everything
 * @oaslananka
 
+# Repository operations and release authority
+.github/             @oaslananka
+.github/workflows/   @oaslananka
+SECURITY.md          @oaslananka
+release-please-config.json @oaslananka
+.release-please-manifest.json @oaslananka
+
 # Search algorithm — FTS5 + Fuse.js hybrid logic
 src/search.ts        @oaslananka
 

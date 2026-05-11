@@ -1,78 +1,31 @@
-You are a senior software engineer.
+# AGENTS.md
 
-WORKING PRINCIPLES:
+## This repo is a CI/CD mirror
 
-[ENVIRONMENT — BEFORE STARTING THE TASK]
+Source of truth: oaslananka/mcp-debug-recorder
+Do NOT push code changes here — this repo is downstream.
+All code must originate from the personal repo.
 
-1. Detect the operating system:
-   - Linux/macOS: `uname -s && echo $SHELL && node --version`
-   - Windows: `$env:OS && $PSVersionTable.PSVersion && node --version`
-2. Confirm required tools are available (`git`, `node`, `npm`, optional `python`/`pip`).
-3. Check whether `AGENTS.md` exists. If it does, read it and follow its rules.
-4. Check whether `README.md` exists. If it does, read it.
+## Control-plane
+oaslananka-lab/_ops
 
-[PIN LIBRARIES]
+## Before any PR work
+Run diagnostics:
+  gh workflow run .github/workflows/agent-pr-diagnostics.yml \
+    --repo oaslananka-lab/_ops --ref main \
+    -f target_owner=oaslananka-lab \
+    -f target_repo=mcp-debug-recorder \
+    -f pr_number={PR_NUMBER}
 
-Before writing code, research current stable versions and update the approved table.
+## Before any release
+  gh workflow run .github/workflows/repo-release-plan.yml \
+    --repo oaslananka-lab/_ops --ref main \
+    -f target_owner=oaslananka-lab \
+    -f target_repo=mcp-debug-recorder
 
-## Approved Dependencies
-| Package | Version | Why |
-| ----- | -------- | ----- |
-| `@modelcontextprotocol/sdk` | `1.29.0` | Current stable release on the MCP SDK v1.x line as of April 2026. |
-| `better-sqlite3` | `12.8.0` | Current stable native SQLite release compatible with Node 20 and Node 24. |
-| `fuse.js` | `7.3.0` | Current stable Fuse.js release compatible with the existing fuzzy search API. |
-| `zod` | `3.25.76` | Stable patch release that satisfies the `3.25+` requirement and behaves well with TypeScript inference. |
-| `eslint` | `9.39.4` | Current stable release on the ESLint 9 maintenance line, selected for flat config migration. |
-| `@eslint/js` | `9.39.4` | Kept on the same maintenance line as ESLint 9 flat config. |
-| `@typescript-eslint/eslint-plugin` | `8.58.1` | Current stable plugin release compatible with ESLint 9 and TypeScript 5.9. |
-| `@typescript-eslint/parser` | `8.58.1` | Parser release compatible with ESLint 9 and TypeScript 5.9. |
-| `typescript` | `5.9.3` | Current TypeScript 5.9 patch line for the conservative quality pass. |
-| `@types/node` | `22.19.17` | Stable Node type line compatible with Node 20 and Node 24 runtime support. |
-| `globals` | `17.4.0` | Required to define environment globals explicitly in ESLint flat config. |
-| `ts-node` | `10.9.2` | Required helper tool for `npm run dev`. |
-| `jest-junit` | `16.0.0` | Required to publish Azure DevOps test results as JUnit XML. |
-| `typedoc` | `0.28.18` | API documentation generator compatible with TypeScript 5.9. |
-| `typedoc-plugin-markdown` | `4.11.0` | Selected to generate TypeDoc output as Markdown under `docs/api`. |
+## Merge rule
+Squash only. Never merge without clean diagnostics.
 
-[WORK RULES]
-
-- Do not write a plan or preamble; start working directly.
-- Read in parallel; inspect independent files at the same time.
-- Run tests after every meaningful set of changes.
-- Do not claim the work is finished until tests pass.
-- Update the dependency table in this file before adding a new library.
-
-[ERROR PROTOCOL — 5 ATTEMPTS]
-
-If an error occurs, follow this order:
-
-1. Read the full error, check the official documentation, try a different fix, and test.
-2. Use a completely different strategy from the first attempt, then test.
-3. Research an alternative method, then test.
-4. Isolate the issue, build a minimal reproducer, solve it layer by layer, then test.
-5. If necessary, try the most radically different approach, then test.
-
-If the issue is still unresolved after 5 attempts:
-
-1. Create the `.TEMP/ERROR/` directory.
-2. Create an `ERROR_[timestamp]_CodexCLI.md` file.
-3. Write the following:
-   - The full project context
-   - The full contents of `package.json`
-   - The task that was being attempted
-   - Each of the 5 attempts: approach, error, analysis
-   - Root cause analysis
-   - Current project state
-   - Full contents of related files
-   - Recommended next steps
-4. Tell the user the file path.
-5. Stop.
-
-[DELIVERY]
-
-When the task is complete:
-
-1. Which files changed
-2. Test output (`pass`/`fail`)
-3. Side effects
-4. Next step (one sentence)
+## Operating contract
+https://github.com/oaslananka-lab/_ops/blob/main/docs/agent-operating-contract.md
+https://github.com/oaslananka-lab/_ops/blob/main/docs/architecture.md

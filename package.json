@@ -31,6 +31,7 @@
     "dev": "ts-node --esm src/mcp.ts",
     "start": "node dist/mcp.js",
     "start:http": "node dist/server-http.js",
+    "typecheck": "tsc --noEmit",
     "lint": "tsc --noEmit && eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -40,6 +41,7 @@
     "test:e2e": "node scripts/run-jest.mjs --suite=e2e --testPathPattern=e2e",
     "docs:api": "typedoc --options typedoc.json",
     "audit": "npm audit --audit-level=moderate",
+    "ci:check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e && npm pack --dry-run && node scripts/validate-mcp-metadata.mjs",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint && npm run format:check && npm test && npm run build",
     "version": "node scripts/sync-version.mjs && git add mcp.json"
@@ -61,11 +63,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oaslananka/mcp-debug-recorder.git"
+    "url": "git+https://github.com/oaslananka-lab/mcp-debug-recorder.git"
   },
-  "homepage": "https://github.com/oaslananka/mcp-debug-recorder#readme",
+  "homepage": "https://github.com/oaslananka-lab/mcp-debug-recorder#readme",
   "bugs": {
-    "url": "https://github.com/oaslananka/mcp-debug-recorder/issues"
+    "url": "https://github.com/oaslananka-lab/mcp-debug-recorder/issues"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",

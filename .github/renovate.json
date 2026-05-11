@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "schedule": ["before 6am on Monday"],
+  "labels": ["dependencies"],
+  "automerge": false,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "needs-review"],
+      "automerge": false
+    },
+    {
+      "matchPackageNames": ["better-sqlite3"],
+      "labels": ["dependencies", "native-addon", "needs-review"],
+      "automerge": false
+    }
+  ],
+  "groupName": "all non-major dependencies",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2
+}

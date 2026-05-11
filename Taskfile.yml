@@ -1,0 +1,37 @@
+version: "3"
+
+tasks:
+  format:
+    cmds:
+      - npm run format
+  format-check:
+    cmds:
+      - npm run format:check
+  lint:
+    cmds:
+      - npm run lint
+  typecheck:
+    cmds:
+      - npm run typecheck
+  test:
+    cmds:
+      - npm test
+  security:
+    cmds:
+      - npm audit --audit-level=high
+      - pipx run --spec "zizmor==1.24.1" zizmor --offline --min-severity low .github/workflows
+  build:
+    cmds:
+      - npm run build
+  release-dry-run:
+    cmds:
+      - npx release-please release-pr --dry-run
+  ci:
+    deps:
+      - format-check
+      - lint
+      - typecheck
+      - test
+      - security
+      - build
+      - release-dry-run
